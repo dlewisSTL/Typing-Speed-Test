@@ -44,7 +44,7 @@ The goal of this project was to build a realistic typing speed application that 
 ## Links
 
 - Solution URL: [GitHub Repository](https://github.com/dlewisSTL/Typing-Speed-Test)
-- Live Site URL: [Live Demo](ADD_DEPLOYED_SITE_LINK)
+- Live Site URL: [Live Demo](https://typing-speed-test-umber-two.vercel.app)
 
 ---
 
