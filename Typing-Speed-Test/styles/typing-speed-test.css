@@ -69,7 +69,7 @@ button:focus-visible, a:focus-visible {
 
 @font-face {
     font-family: 'Sora';
-    src: url('../fonts/sora/sora-variablefont_wght.ttf') format('truetype');
+    src: url('../fonts/Sora/Sora-VariableFont_wght.ttf') format('truetype');
     font-style: normal;
     font-weight: 100 800;
 }
