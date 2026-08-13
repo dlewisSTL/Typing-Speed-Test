@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Typing Speed Test</title>
+        <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="stylesheet" href="styles/typing-speed-test.css">
+    </head>
+    <body>
+        <div class="container typing-test-app">
+            <header>
+                <nav>
+                    <a class="logo-link" href="/index.html">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/logo-small.svg">
+                            <img src="images/logo-large.svg" alt="Typing Speed Test logo with tagline: Type as fast as you can in 60 seconds">
+                        </picture>
+                    </a>
+                    <div class="personal-best" aria-label="Personal best score">
+                        <img src="images/icon-personal-best.svg" alt="">
+                        <span class="desktop-best-label">Personal Best:</span>
+                        <span class="mobile-best-label">Best:</span>
+                        <span id="score">0 WPM</span>
+                    </div>
+                </nav>
+            </header>
+            <main>
+                <h1 class="sr-only">Typing Speed Test</h1>
+                <section class="stats-container">
+                    <div class="stats-row">
+                        <div class="wpm-container">
+                            <span class="wpm-label">WPM:</span>
+                            <span id="wpm-value">0</span>
+                        </div>
+                        <div class="divider"><div>&nbsp;</div></div>
+                        <div class="accuracy-container">
+                            <span class="accuracy-label">Accuracy:</span>
+                            <span id="accuracy-value">100%</span>
+                        </div>
+                        <div class="divider"><div>&nbsp;</div></div>
+                        <div class="time-container">
+                            <span class="time-label">Time:</span>
+                            <span id="time-value"></span>
+                        </div>
+                    </div>
+                    <div class="settings-container">
+                        <div class="difficulty-container">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <button id="easy-button" type="button">Easy</button>
+                            <button id="medium-button" type="button">Medium</button>
+                            <button id="hard-button" type="button" class="active">Hard</button>
+                        </div>
+                        <div class="divider"><div>&nbsp;</div></div>
+                        <div class="mode-container">
+                            <span class="mode-label">Mode:</span>
+                            <button id="timed-mode" type="button" class="active">Timed (60s)</button>
+                            <button id="passage-mode" type="button">Passage</button>
+                        </div>
+                    </div>
+                    <!-- Mobile Settings -->
+                    <div class="mobile-settings-container">
+                        <div class="mobile-select difficulty-select">
+                            <button class="mobile-select-button" type="button" aria-expanded="false">
+                                <span class="mobile-select-label">Hard</span>
+                                <img class="dropdown-arrow" src="images/icon-down-arrow.svg" alt="">
+                            </button>
+                            <fieldset class="mobile-dropdown">
+                                <legend class="sr-only">Difficulty</legend>
+                                <div class="mobile-dropdown-radio">
+                                    <input type="radio" id="easy-difficulty-mobile" name="difficulty" value="easy">
+                                    <label for="easy-difficulty-mobile">Easy</label>
+                                </div>
+                                <div class="rectangle">&nbsp;</div>
+                                <div class="mobile-dropdown-radio">
+                                    <input type="radio" id="medium-difficulty-mobile" name="difficulty" value="medium">
+                                    <label for="medium-difficulty-mobile">Medium</label>
+                                </div>
+                                <div class="rectangle">&nbsp;</div>
+                                <div class="mobile-dropdown-radio">
+                                    <input type="radio" id="hard-difficulty-mobile" name="difficulty" value="hard" checked>
+                                    <label for="hard-difficulty-mobile">Hard</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="mobile-select mode-select">
+                            <button class="mobile-select-button" type="button" aria-expanded="false">
+                                <span class="mobile-select-label">Timed (60s)</span>
+                                <img class="dropdown-arrow" src="images/icon-down-arrow.svg" alt="">
+                            </button>
+                            <fieldset class="mobile-dropdown">
+                                <legend class="sr-only">Mode</legend>
+                                <div class="mobile-dropdown-radio">
+                                    <input type="radio" id="timed-mode-mobile" name="mode" value="timed" checked>
+                                    <label for="timed-mode-mobile">Timed (60s)</label>
+                                </div>
+                                <div class="rectangle">&nbsp;</div>
+                                <div class="mobile-dropdown-radio">
+                                    <input type="radio" id="passage-mode-mobile" name="mode" value="passage">
+                                    <label for="passage-mode-mobile">Passage</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </section>
+                <section class="text-container">
+                    <div class="text-row">
+                        <div class="text-box inactive">
+                            <div id="text-box"></div>
+                            <textarea id="text-input" aria-label="Typing input area" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+                        </div>
+                        <div class="button-container">
+                            <button id="start-button" type="button" aria-label="Start typing test">Start Typing Test</button>
+                            <p class="button-text">Or click the text and start typing</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="results-screen results-baseline hidden">
+                    <div class="check-circle">
+                        <img src="images/icon-completed.svg" alt="Checkmark inside a green circle">
+                    </div>
+                    <div class="message-container">
+                        <h2 class="result-title">Baseline Established!</h2>
+                        <p class="result-message">You’ve set the bar. Now the real challenge begins—time to beat&nbsp;it.</p>
+                    </div>
+                    <div class="results-stats-row">
+                        <div class="results-wpm-container">
+                            <span class="results-wpm-label">WPM:</span>
+                            <span class="results-wpm-value">0</span>
+                        </div>
+                        <div class="results-accuracy-container">
+                            <span class="results-accuracy-label">Accuracy:</span>
+                            <span class="results-accuracy-value">0%</span>
+                        </div>
+                        <div class="results-character-container">
+                            <span class="results-character-label">Characters</span>
+                            <span class="results-character-count-value">
+                                <span class="cc-green results-correct">0</span><span class="cc-gray">/</span><span class="cc-red results-incorrect">0</span>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="action-button restart-button" type="button">
+                        <span class="action-text">Beat This Score</span>
+                        <span class="refresh-icon">
+                            <svg class="restart-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                <path d="M0.421875 0H1.37109C1.61719 0 1.79297 0.210938 1.79297 0.457031L1.72266 3.90234C3.26953 1.54688 5.97656 0 9 0.0351562C13.8164 0.0351562 17.7188 3.97266 17.7188 8.75391C17.6836 13.5703 13.7812 17.4375 9 17.4375C6.75 17.4375 4.67578 16.5938 3.12891 15.2227C2.95312 15.0469 2.95312 14.7656 3.12891 14.5898L3.83203 13.8867C3.97266 13.7461 4.21875 13.7461 4.39453 13.8867C5.625 14.9766 7.20703 15.6094 9 15.6094C12.7969 15.6094 15.8906 12.5508 15.8906 8.71875C15.8906 4.92188 12.7969 1.82812 9 1.82812C6.1875 1.82812 3.79688 3.51562 2.70703 5.90625L7.13672 5.80078C7.38281 5.80078 7.59375 5.97656 7.59375 6.22266V7.17188C7.59375 7.41797 7.38281 7.59375 7.17188 7.59375H0.421875C0.175781 7.59375 0 7.41797 0 7.17188V0.421875C0 0.210938 0.175781 0 0.421875 0Z"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="star-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1429 0H14.8571V13.2409L5.49442 3.87816L3.87818 5.49442L13.2409 14.8571H0V17.1429H13.2409L3.87818 26.5056L5.49442 28.1218L14.8571 18.759V32H17.1429V18.759L26.5056 28.1218L28.1218 26.5056L18.759 17.1429H32V14.8571H18.759L28.1218 5.4944L26.5056 3.87816L17.1429 13.2409V0Z" fill="#D64D5B"/>
+                        </svg>
+                    </div>
+                    <div class="star-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="74" height="74" viewBox="0 0 74 74" aria-hidden="true">
+                            <g clip-path="url(#baseline-clip)">
+                                <mask id="baseline-mask" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="74" height="74">
+                                    <path d="M74 0H0V74H74V0Z" fill="white"/>
+                                </mask>
+                                <g mask="url(#baseline-mask)">
+                                    <path d="M37 74C35.9288 38.9469 35.0531 38.0767 0 37C35.0531 35.9288 35.9234 35.0531 37 0C38.0712 35.0531 38.9469 35.9234 74 37C38.9469 38.0767 38.0767 38.9362 37 74Z" fill="#F4DC73"/>
+                                </g>
+                            </g>
+                            <defs>
+                                <clipPath id="baseline-clip">
+                                    <rect width="74" height="74" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </section>
+                <section class="results-screen results-test-complete hidden">
+                    <div class="check-circle">
+                        <img src="images/icon-completed.svg" alt="Checkmark inside a green circle">
+                    </div>
+                    <div class="message-container">
+                        <h2 class="result-title">Test Complete!</h2>
+                        <p class="result-message">Solid run. Keep pushing to beat your high&nbsp;score.</p>
+                    </div>
+                    <div class="results-stats-row">
+                        <div class="results-wpm-container">
+                            <span class="results-wpm-label">WPM:</span>
+                            <span class="results-wpm-value">0</span>
+                        </div>
+                        <div class="results-accuracy-container">
+                            <span class="results-accuracy-label">Accuracy:</span>
+                            <span class="results-accuracy-value">0%</span>
+                        </div>
+                        <div class="results-character-container">
+                            <span class="results-character-label">Characters</span>
+                            <span class="results-character-count-value">
+                                <span class="cc-green results-correct">0</span><span class="cc-gray">/</span><span class="cc-red results-incorrect">0</span>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="action-button restart-button" type="button">
+                        <span class="action-text">Go Again</span>
+                        <span class="refresh-icon">
+                            <svg class="restart-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                <path d="M0.421875 0H1.37109C1.61719 0 1.79297 0.210938 1.79297 0.457031L1.72266 3.90234C3.26953 1.54688 5.97656 0 9 0.0351562C13.8164 0.0351562 17.7188 3.97266 17.7188 8.75391C17.6836 13.5703 13.7812 17.4375 9 17.4375C6.75 17.4375 4.67578 16.5938 3.12891 15.2227C2.95312 15.0469 2.95312 14.7656 3.12891 14.5898L3.83203 13.8867C3.97266 13.7461 4.21875 13.7461 4.39453 13.8867C5.625 14.9766 7.20703 15.6094 9 15.6094C12.7969 15.6094 15.8906 12.5508 15.8906 8.71875C15.8906 4.92188 12.7969 1.82812 9 1.82812C6.1875 1.82812 3.79688 3.51562 2.70703 5.90625L7.13672 5.80078C7.38281 5.80078 7.59375 5.97656 7.59375 6.22266V7.17188C7.59375 7.41797 7.38281 7.59375 7.17188 7.59375H0.421875C0.175781 7.59375 0 7.41797 0 7.17188V0.421875C0 0.210938 0.175781 0 0.421875 0Z"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="star-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1429 0H14.8571V13.2409L5.49442 3.87816L3.87818 5.49442L13.2409 14.8571H0V17.1429H13.2409L3.87818 26.5056L5.49442 28.1218L14.8571 18.759V32H17.1429V18.759L26.5056 28.1218L28.1218 26.5056L18.759 17.1429H32V14.8571H18.759L28.1218 5.4944L26.5056 3.87816L17.1429 13.2409V0Z" fill="#D64D5B"/>
+                        </svg>
+                    </div>
+                    <div class="star-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="74" height="74" viewBox="0 0 74 74" aria-hidden="true">
+                            <g clip-path="url(#complete-clip)">
+                                <mask id="complete-mask" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="74" height="74">
+                                    <path d="M74 0H0V74H74V0Z" fill="white"/>
+                                </mask>
+                                <g mask="url(#complete-mask)">
+                                    <path d="M37 74C35.9288 38.9469 35.0531 38.0767 0 37C35.0531 35.9288 35.9234 35.0531 37 0C38.0712 35.0531 38.9469 35.9234 74 37C38.9469 38.0767 38.0767 38.9362 37 74Z" fill="#F4DC73"/>
+                                </g>
+                            </g>
+                            <defs>
+                                <clipPath id="complete-clip">
+                                    <rect width="74" height="74" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </section>
+                <section class="results-screen results-high-score hidden">
+                    <div class="party">
+                        <img src="images/icon-new-pb.svg" alt="Party Icon">
+                    </div>
+                    <div class="message-container-high-score">
+                        <h2 class="result-title">High Score Smashed!</h2>
+                        <p class="result-message">You're getting faster. That was incredible&nbsp;typing.</p>
+                    </div>
+                    <div class="results-stats-row">
+                        <div class="results-wpm-container">
+                            <span class="results-wpm-label">WPM:</span>
+                            <span class="results-wpm-value">0</span>
+                        </div>
+                        <div class="results-accuracy-container">
+                            <span class="results-accuracy-label">Accuracy:</span>
+                            <span class="results-accuracy-value">0%</span>
+                        </div>
+                        <div class="results-character-container">
+                            <span class="results-character-label">Characters</span>
+                            <span class="results-character-count-value">
+                                <span class="cc-green results-correct">0</span><span class="cc-gray">/</span><span class="cc-red results-incorrect">0</span>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="action-button restart-button" type="button">
+                        <span class="action-text">Beat This Score</span>
+                        <span class="refresh-icon">
+                            <svg class="restart-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                <path d="M0.421875 0H1.37109C1.61719 0 1.79297 0.210938 1.79297 0.457031L1.72266 3.90234C3.26953 1.54688 5.97656 0 9 0.0351562C13.8164 0.0351562 17.7188 3.97266 17.7188 8.75391C17.6836 13.5703 13.7812 17.4375 9 17.4375C6.75 17.4375 4.67578 16.5938 3.12891 15.2227C2.95312 15.0469 2.95312 14.7656 3.12891 14.5898L3.83203 13.8867C3.97266 13.7461 4.21875 13.7461 4.39453 13.8867C5.625 14.9766 7.20703 15.6094 9 15.6094C12.7969 15.6094 15.8906 12.5508 15.8906 8.71875C15.8906 4.92188 12.7969 1.82812 9 1.82812C6.1875 1.82812 3.79688 3.51562 2.70703 5.90625L7.13672 5.80078C7.38281 5.80078 7.59375 5.97656 7.59375 6.22266V7.17188C7.59375 7.41797 7.38281 7.59375 7.17188 7.59375H0.421875C0.175781 7.59375 0 7.41797 0 7.17188V0.421875C0 0.210938 0.175781 0 0.421875 0Z"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <img class="confetti" src="images/pattern-confetti.svg" alt="">
+                </section>
+                <section class="results-screen results-try-again hidden">
+                    <div class="try-again-icon">
+                        <img src="images/logo-small.svg" alt="Speed Test Logo">
+                    </div>
+                    <div class="message-container">
+                        <h2 class="result-title">Try Again!</h2>
+                        <p class="result-message">Your accuracy was too low. Try typing the passage instead of skipping&nbsp;characters.</p>
+                    </div>
+                    <div class="results-stats-row">
+                        <div class="results-wpm-container">
+                            <span class="results-wpm-label">WPM:</span>
+                            <span class="results-wpm-value">0</span>
+                        </div>
+                        <div class="results-accuracy-container">
+                            <span class="results-accuracy-label">Accuracy:</span>
+                            <span class="results-accuracy-value">0%</span>
+                        </div>
+                        <div class="results-character-container">
+                            <span class="results-character-label">Characters</span>
+                            <span class="results-character-count-value">
+                                <span class="cc-green results-correct">0</span><span class="cc-gray">/</span><span class="cc-red results-incorrect">0</span>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="action-button restart-button" type="button">
+                        <span class="action-text">Go Again</span>
+                        <span class="refresh-icon">
+                            <svg class="restart-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                <path d="M0.421875 0H1.37109C1.61719 0 1.79297 0.210938 1.79297 0.457031L1.72266 3.90234C3.26953 1.54688 5.97656 0 9 0.0351562C13.8164 0.0351562 17.7188 3.97266 17.7188 8.75391C17.6836 13.5703 13.7812 17.4375 9 17.4375C6.75 17.4375 4.67578 16.5938 3.12891 15.2227C2.95312 15.0469 2.95312 14.7656 3.12891 14.5898L3.83203 13.8867C3.97266 13.7461 4.21875 13.7461 4.39453 13.8867C5.625 14.9766 7.20703 15.6094 9 15.6094C12.7969 15.6094 15.8906 12.5508 15.8906 8.71875C15.8906 4.92188 12.7969 1.82812 9 1.82812C6.1875 1.82812 3.79688 3.51562 2.70703 5.90625L7.13672 5.80078C7.38281 5.80078 7.59375 5.97656 7.59375 6.22266V7.17188C7.59375 7.41797 7.38281 7.59375 7.17188 7.59375H0.421875C0.175781 7.59375 0 7.41797 0 7.17188V0.421875C0 0.210938 0.175781 0 0.421875 0Z"/>
+                            </svg>
+                        </span>
+                    </button>
+                </section>
+            </main>
+            <footer class="test-footer hidden">
+                <button class="restart-test-button" type="button">
+                    <span class="restart-text">Restart Test</span>
+                    <span class="refresh-icon">
+                        <svg class="restart-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                            <path d="M0.421875 0H1.37109C1.61719 0 1.79297 0.210938 1.79297 0.457031L1.72266 3.90234C3.26953 1.54688 5.97656 0 9 0.0351562C13.8164 0.0351562 17.7188 3.97266 17.7188 8.75391C17.6836 13.5703 13.7812 17.4375 9 17.4375C6.75 17.4375 4.67578 16.5938 3.12891 15.2227C2.95312 15.0469 2.95312 14.7656 3.12891 14.5898L3.83203 13.8867C3.97266 13.7461 4.21875 13.7461 4.39453 13.8867C5.625 14.9766 7.20703 15.6094 9 15.6094C12.7969 15.6094 15.8906 12.5508 15.8906 8.71875C15.8906 4.92188 12.7969 1.82812 9 1.82812C6.1875 1.82812 3.79688 3.51562 2.70703 5.90625L7.13672 5.80078C7.38281 5.80078 7.59375 5.97656 7.59375 6.22266V7.17188C7.59375 7.41797 7.38281 7.59375 7.17188 7.59375H0.421875C0.175781 7.59375 0 7.41797 0 7.17188V0.421875C0 0.210938 0.175781 0 0.421875 0Z"/>
+                        </svg>
+                    </span>
+                </button>
+            </footer>
+        </div>
+        <script type="module" src="scripts/index.js"></script> 
+    </body>
+</html>
